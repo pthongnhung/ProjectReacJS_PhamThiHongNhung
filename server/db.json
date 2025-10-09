@@ -6,6 +6,46 @@
       "email": "pthongnhung13122006@gmail.com",
       "password": "12345678",
       "id": 1
+    },
+    {
+      "firstName": "Phạm Thị",
+      "lastName": "Hồng Nhung",
+      "email": "pthongnhung131222006@gmail.com",
+      "password": "12345678",
+      "id": 2
     }
-  ]
+  ],
+  "categories": [
+    {
+      "name": "Food and Drinks",
+      "description": "Từ vựng liên quan đến đồ ăn",
+      "id": 1
+    },
+    {
+      "name": "Transportation",
+      "description": "Từ vựng liên quán đến phương tiện giao thông\n",
+      "id": 2
+    },
+    {
+      "name": "Emotions and Feelings",
+      "description": "Từ vựng liên quan tới mô tả cảm xúc",
+      "id": 3
+    },
+    {
+      "name": "Weather and Seasons",
+      "description": "Từ vựng nói về thời tiết",
+      "id": 4
+    },
+    {
+      "name": "Clothes",
+      "description": "Từ vựng liên quan đến quần áo",
+      "id": 5
+    },
+    {
+      "name": "Family and Relationships",
+      "description": "Liên quan đến gia đình",
+      "id": 6
+    }
+  ],
+  "vocabs": []
 }
