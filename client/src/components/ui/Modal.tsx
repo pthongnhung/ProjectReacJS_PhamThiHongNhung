@@ -29,7 +29,7 @@ export default function Modal({
     >
       <div className={`bg-white rounded-lg shadow-xl ${widthClass}`}>
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-3 border-b">
+        <div className="flex items-center justify-between px-5 py-3 border-b border-gray-500">
           <h3 className="text-[16.5px] font-semibold">{title}</h3>
           <button
             onClick={onClose}
@@ -44,7 +44,9 @@ export default function Modal({
         <div className="px-5 py-4">{children}</div>
 
         {/* Footer */}
-        {footer && <div className="px-5 py-3 border-t">{footer}</div>}
+        {footer && (
+          <div className="px-5 py-3 border-t border-gray-500">{footer}</div>
+        )}
       </div>
     </div>
   );

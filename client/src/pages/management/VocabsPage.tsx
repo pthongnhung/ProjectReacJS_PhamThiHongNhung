@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -153,10 +154,11 @@ export default function VocabsPage() {
             >
               Add New Word
             </button>
+            
           </div>
 
           {/* Filters */}
-          <div className="px-6 mt-4 flex gap-3">
+          <div className="px-6 mt-4 flex flex-col gap-3 h-[84px]">
             <select
               className="h-9 border rounded px-3 text-sm"
               value={categoryId === "" ? "" : Number(categoryId)}
@@ -182,19 +184,6 @@ export default function VocabsPage() {
               placeholder="Search vocabulary..."
               className="flex-1 h-9 rounded-md border border-gray-300 px-3 text-sm outline-none focus:ring-2 focus:ring-green-200 focus:border-gray-500"
             />
-
-            <select
-              className="h-9 border rounded px-2 text-sm"
-              value={limit}
-              onChange={(e) => dispatch(setLimit(Number(e.target.value)))}
-              title="Items per page"
-            >
-              {[5, 10, 20].map((n) => (
-                <option key={n} value={n}>
-                  {n}/page
-                </option>
-              ))}
-            </select>
           </div>
 
           <div className="px-6 py-4">
@@ -245,12 +234,7 @@ export default function VocabsPage() {
               )}
             </div>
 
-            {/* Pagination */}
-            <div className="flex items-center justify-between mt-4">
-              <div className="text-sm text-gray-500">
-                Page {page}/{totalPages} — Total: {total}
-              </div>
-
+            <div className="flex items-center justify-between mt-4 flex-col">
               <div className="flex items-center gap-2">
                 <button
                   disabled={!canPrev}

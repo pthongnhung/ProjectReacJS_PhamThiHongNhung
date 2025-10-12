@@ -37,7 +37,7 @@ export default function VocabForm({
       <div>
         <label className="block text-sm mb-1">Word</label>
         <input
-          className="w-full border rounded px-3 h-9"
+          className="w-full border rounded px-3 h-9 border-gray-400"
           {...register("word")}
           placeholder="Word"
         />
@@ -47,9 +47,9 @@ export default function VocabForm({
       </div>
 
       <div>
-        <label className="block text-sm mb-1">Meaning</label>
-        <input
-          className="w-full border rounded px-3 h-9"
+        <label className="block text-sm mb-1 ">Meaning</label>
+        <textarea
+          className="w-full border rounded px-3 h-9  border-gray-400"
           {...register("meaning")}
           placeholder="Meaning"
         />
@@ -61,7 +61,7 @@ export default function VocabForm({
       <div>
         <label className="block text-sm mb-1">Category</label>
         <select
-          className="w-full border rounded px-3 h-9"
+          className="w-full border rounded px-3 h-9  border-gray-400"
           {...register("categoryId", { valueAsNumber: true })}
         >
           {categories.map((c) => (

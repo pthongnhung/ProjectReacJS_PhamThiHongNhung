@@ -129,7 +129,7 @@ export default function CategoriesPage() {
       </header>
 
       {/* Card */}
-      <main className="max-w-6xl mx-auto px-4 py-6">
+      <div className="max-w-6xl h-[90vh] mx-auto px-4 py-6 flex flex-col justify-between">
         <div className="rounded-xl bg-white shadow-[0_10px_30px_-12px_rgba(0,0,0,0.15)]">
           <div className="flex items-center justify-between px-6 pt-6">
             <h1 className="text-xl font-bold">Vocabulary Categories</h1>
@@ -221,7 +221,7 @@ export default function CategoriesPage() {
         <p className="text-center text-xs text-gray-500 mt-8">
           © 2024 VocabApp. All rights reserved.
         </p>
-      </main>
+      </div>
 
       {/* Modal Add/Edit */}
       <Modal

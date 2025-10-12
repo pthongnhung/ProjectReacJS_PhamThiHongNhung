@@ -22,30 +22,39 @@
       "id": 1
     },
     {
-      "name": "Transportation",
-      "description": "Từ vựng liên quán đến phương tiện giao thông\n",
-      "id": 2
-    },
-    {
       "name": "Emotions and Feelings",
       "description": "Từ vựng liên quan tới mô tả cảm xúc",
       "id": 3
     },
     {
-      "name": "Weather and Seasons",
-      "description": "Từ vựng nói về thời tiết",
+      "name": "vwavgw",
+      "description": "fwagvw",
       "id": 4
     },
     {
-      "name": "Clothes",
-      "description": "Từ vựng liên quan đến quần áo",
+      "name": "vsDVwe",
+      "description": "bsebe",
       "id": 5
-    },
-    {
-      "name": "Family and Relationships",
-      "description": "Liên quan đến gia đình",
-      "id": 6
     }
   ],
-  "vocabs": []
+  "vocabs": [
+    {
+      "word": "a",
+      "meaning": "a",
+      "categoryId": 1,
+      "id": 1
+    },
+    {
+      "word": "as",
+      "meaning": "sa",
+      "categoryId": 1,
+      "id": 2
+    },
+    {
+      "word": "as",
+      "meaning": "as",
+      "categoryId": 1,
+      "id": 3
+    }
+  ]
 }

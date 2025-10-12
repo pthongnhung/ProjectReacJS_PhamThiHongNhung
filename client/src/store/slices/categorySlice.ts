@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSlice,
+  type PayloadAction,
+} from "@reduxjs/toolkit";
 import categoryApi from "../../apis/categoryApi";
 import type {
   Category,
@@ -108,7 +112,7 @@ const categorySlice = createSlice({
     });
     b.addCase(createCategory.fulfilled, (s, a) => {
       s.loading = false;
-      s.items.unshift(a.payload);
+      s.items.push(a.payload);
       s.total += 1; // tổng tăng lên 1
     });
     b.addCase(createCategory.rejected, (s, a) => {
