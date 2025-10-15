@@ -5,9 +5,7 @@ interface ModalProps {
   title?: string;
   onClose: () => void;
   children: React.ReactNode;
-  /** ví dụ: "w-[560px]" / "w-[640px]" */
   widthClass?: string;
-  /** phần nút ở dưới (Cancel / Save / Delete) */
   footer?: React.ReactNode;
 }
 

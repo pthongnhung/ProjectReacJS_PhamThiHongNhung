@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,7 +11,7 @@ import {
   createCategory,
   updateCategory,
   deleteCategory,
-  setPage, // thêm action đổi page từ slice
+  setPage,
 } from "../../store/slices/categorySlice";
 
 import Modal from "../../components/ui/Modal";
@@ -18,6 +19,7 @@ import CategoryForm from "../../components/forms/CategoryForm";
 import ConfirmModal from "../../components/ui/ConfirmModal";
 import Swal from "sweetalert2";
 import { logout } from "../../store/slices/authSlice";
+import usePagination from "../../hooks/usePagination";
 
 export default function CategoriesPage() {
   const dispatch = useDispatch<any>();
@@ -33,14 +35,18 @@ export default function CategoriesPage() {
     open: false,
   });
 
-  // Fetch categories theo page, limit, q
   useEffect(() => {
     dispatch(
       fetchCategories({ _page: page, _limit: limit, q: q || undefined })
     );
   }, [dispatch, q, page, limit]);
 
-  const totalPages = Math.ceil(total / limit) || 1;
+  const { totalPages, canPrev, canNext, pages } = usePagination(
+    total,
+    page,
+    limit
+  );
+
 
   const onCreate = () => {
     setEditing(null);
@@ -59,8 +65,10 @@ export default function CategoriesPage() {
     } else {
       const res = await dispatch(createCategory(body));
       if (createCategory.fulfilled.match(res)) setOpenForm(false);
-    }
+    } 
   };
+
+
 
   const confirmDelete = async () => {
     if (!openDelete.id) return;
@@ -144,7 +152,10 @@ export default function CategoriesPage() {
           <div className="px-6 mt-4">
             <input
               value={q}
-              onChange={(e) => setQ(e.target.value)}
+              onChange={(e) => {
+                setQ(e.target.value);
+                if (page !== 1) dispatch(setPage(1));
+              }}
               placeholder="Search categories..."
               className="w-full h-9 rounded-md border border-gray-300 px-3 text-sm outline-none focus:ring-2 focus:ring-green-200 focus:border-gray-500"
             />
@@ -195,21 +206,30 @@ export default function CategoriesPage() {
 
             {error && <p className="text-red-500 mt-3">{error}</p>}
 
-            {/* Pagination */}
-            <div className="flex justify-center items-center gap-4 mt-6">
+            <div className="flex justify-center items-center gap-2 mt-6">
               <button
                 onClick={() => dispatch(setPage(page - 1))}
-                disabled={page <= 1}
+                disabled={!canPrev}
                 className="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
               >
                 Prev
               </button>
-              <span className="text-sm">
-                Page {page} of {totalPages}
-              </span>
+
+              {pages.map((p) => (
+                <button
+                  key={p}
+                  onClick={() => dispatch(setPage(p))}
+                  className={`px-3 py-1 rounded border ${
+                    p === page ? "bg-blue-500 text-white" : "bg-gray-100"
+                  }`}
+                >
+                  {p}
+                </button>
+              ))}
+
               <button
                 onClick={() => dispatch(setPage(page + 1))}
-                disabled={page >= totalPages}
+                disabled={!canNext}
                 className="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
               >
                 Next

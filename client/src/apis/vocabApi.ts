@@ -23,6 +23,25 @@ const vocabApi = {
   async remove(id: number): Promise<void> {
     await axiosClient.delete(`/vocabs/${id}`);
   },
+
+  // Kiểm tra trùng word (không phân biệt hoa/thường), bỏ qua chính nó khi edit
+  async existsWord(word: string, excludeId?: number): Promise<boolean> {
+ 
+    const res = await axiosClient.get<Vocab[]>("/vocabs", {
+      params: { word_like: `^${word.trim()}$` },
+    });
+    const lower = word.trim().toLowerCase();
+    return res.data.some(
+      (v) => v.word.trim().toLowerCase() === lower && v.id !== excludeId
+    );
+  },
+  // thêm mới
+  async setLearned(id: number, isLearned: boolean): Promise<Vocab> {
+    const { data } = await axiosClient.patch<Vocab>(`/vocabs/${id}`, {
+      isLearned,
+    });
+    return data;
+  },
 };
 
 export default vocabApi;

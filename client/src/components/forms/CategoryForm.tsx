@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import type { Category, CategoryPayload } from "../../types/category";
-import categoryApi from "../../apis/categoryApi"; // cần import api để check trùng
+import categoryApi from "../../apis/categoryApi"; 
 
 interface Props {
   initial?: Category | null;

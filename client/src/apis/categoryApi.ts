@@ -16,7 +16,7 @@ const categoryApi = {
     const total = Number(res.headers["x-total-count"] || 0); // lấy tổng số từ header json-server
     return {
       data: res.data,
-      total,
+      total
     };
   },
 

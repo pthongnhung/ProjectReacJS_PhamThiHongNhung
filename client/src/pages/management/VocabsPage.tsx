@@ -44,10 +44,10 @@ export default function VocabsPage() {
     open: false,
   });
 
-  // fetch categories (để đổ vào dropdown) + fetch vocabs khi filter/pagination đổi
+
   useEffect(() => {
     if (!categories.length) dispatch(fetchCategories());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     dispatch(fetchVocabs());
@@ -71,7 +71,7 @@ export default function VocabsPage() {
       const res = await dispatch(createVocab(body));
       if (createVocab.fulfilled.match(res)) setOpenForm(false);
     }
-    // để luôn chuẩn trang/total, gọi fetch lại
+  
     dispatch(fetchVocabs());
   };
 
@@ -109,7 +109,7 @@ export default function VocabsPage() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Navbar giống các trang khác */}
+      {/* Navbar */}
       <header className="w-full bg-white shadow-sm">
         <div className="max-w-6xl mx-auto h-12 px-4 flex items-center justify-between">
           <div className="flex gap-[10px]">
@@ -154,7 +154,6 @@ export default function VocabsPage() {
             >
               Add New Word
             </button>
-            
           </div>
 
           {/* Filters */}
@@ -185,7 +184,6 @@ export default function VocabsPage() {
               className="flex-1 h-9 rounded-md border border-gray-300 px-3 text-sm outline-none focus:ring-2 focus:ring-green-200 focus:border-gray-500"
             />
           </div>
-
           <div className="px-6 py-4">
             {/* header */}
             <div className="rounded-md bg-gray-100 text-[12px] tracking-wide text-gray-600 shadow-sm">

@@ -110,10 +110,10 @@ const categorySlice = createSlice({
       s.loading = true;
       s.error = null;
     });
-    b.addCase(createCategory.fulfilled, (s, a) => {
+    b.addCase(createCategory.fulfilled, (s) => {
       s.loading = false;
-      s.items.push(a.payload);
-      s.total += 1; // tổng tăng lên 1
+        
+        s.total = (s.total || 0) + 1; 
     });
     b.addCase(createCategory.rejected, (s, a) => {
       s.loading = false;

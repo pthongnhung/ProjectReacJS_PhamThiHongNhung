@@ -3,6 +3,7 @@ export interface Vocab {
   word: string;
   meaning: string;
   categoryId: number;
+  isLearned?: boolean;
 }
 
 export interface VocabPayload {

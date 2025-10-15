@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import { useForm } from "react-hook-form";
 import type { Vocab, VocabPayload } from "../../types/vocab";
 import type { Category } from "../../types/category";
+import vocabApi from "../../apis/vocabApi";
 
 type Props = {
   initial?: Vocab | null;
@@ -21,6 +23,8 @@ export default function VocabForm({
   const {
     register,
     handleSubmit,
+    setError,
+    clearErrors,
     formState: { errors },
   } = useForm<VocabPayload>({
     defaultValues: initial
@@ -32,8 +36,47 @@ export default function VocabForm({
       : { word: "", meaning: "", categoryId: categories[0]?.id ?? 0 },
   });
 
+  const validateAndSubmit = async (v: VocabPayload) => {
+    clearErrors();
+
+    const word = (v.word ?? "").trim();
+    const meaning = (v.meaning ?? "").trim();
+
+    //  RỖNG
+    if (!word) {
+      setError("word", { type: "manual", message: "Từ không được để trống" });
+      return;
+    }
+    if (!meaning) {
+      setError("meaning", {
+        type: "manual",
+        message: "Nghĩa của từ không được để trống",
+      });
+      return;
+    }
+
+    try {
+      const existed = await vocabApi.existsWord(word, initial?.id);
+      if (existed) {
+        setError("word", {
+          type: "manual",
+          message: "Từ này đã tồn tại",
+        });
+        return;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+
+    onSubmit({ ...v, word, meaning });
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
+    <form
+      onSubmit={handleSubmit(validateAndSubmit)}
+      className="space-y-4"
+      noValidate
+    >
       <div>
         <label className="block text-sm mb-1">Word</label>
         <input
@@ -47,9 +90,9 @@ export default function VocabForm({
       </div>
 
       <div>
-        <label className="block text-sm mb-1 ">Meaning</label>
+        <label className="block text-sm mb-1">Meaning</label>
         <textarea
-          className="w-full border rounded px-3 h-9  border-gray-400"
+          className="w-full border rounded px-3 h-20 border-gray-400"
           {...register("meaning")}
           placeholder="Meaning"
         />
@@ -61,7 +104,7 @@ export default function VocabForm({
       <div>
         <label className="block text-sm mb-1">Category</label>
         <select
-          className="w-full border rounded px-3 h-9  border-gray-400"
+          className="w-full border rounded px-3 h-9 border-gray-400"
           {...register("categoryId", { valueAsNumber: true })}
         >
           {categories.map((c) => (

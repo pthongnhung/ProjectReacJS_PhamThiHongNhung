@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import vocabApi, { Paginated } from "../../apis/vocabApi";
+import vocabApi, { type Paginated } from "../../apis/vocabApi";
 import type { Vocab, VocabPayload, VocabQuery } from "../../types/vocab";
 
 interface VocabState {
@@ -87,7 +87,18 @@ export const deleteVocab = createAsyncThunk<
     return thunkApi.rejectWithValue(e?.message || "Xoá từ vựng thất bại");
   }
 });
-
+// ⬇️ thunk mới: đánh dấu đã học / bỏ đánh dấu
+export const markLearned = createAsyncThunk<
+  Vocab,
+  { id: number; isLearned: boolean },
+  { rejectValue: string }
+>("vocabs/markLearned", async ({ id, isLearned }, thunkApi) => {
+  try {
+    return await vocabApi.setLearned(id, isLearned);
+  } catch (e: any) {
+    return thunkApi.rejectWithValue(e?.message || "Cập nhật trạng thái thất bại");
+  }
+});
 const vocabSlice = createSlice({
   name: "vocabs",
   initialState,
@@ -147,6 +158,10 @@ const vocabSlice = createSlice({
     b.addCase(deleteVocab.fulfilled, (s, a) => {
       s.items = s.items.filter((x) => x.id !== a.payload);
       s.total = Math.max(0, s.total - 1);
+    });
+    b.addCase(markLearned.fulfilled, (s, a) => {
+      const i = s.items.findIndex((x) => x.id === a.payload.id);
+      if (i >= 0) s.items[i] = a.payload; // cập nhật isLearned ngay
     });
   },
 });

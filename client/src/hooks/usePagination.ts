@@ -10,7 +10,6 @@ export default function usePagination(
   const canPrev = page > 1;
   const canNext = page < totalPages;
 
-  // tạo mảng trang đơn giản: [1 .. totalPages] (có thể nâng cấp thêm ellipsis nếu muốn)
   const pages = useMemo(() => {
     return Array.from({ length: totalPages }, (_, i) => i + 1);
   }, [totalPages]);

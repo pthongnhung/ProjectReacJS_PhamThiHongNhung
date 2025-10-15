@@ -3,11 +3,11 @@ import Modal from "./Modal";
 
 interface Props {
   open: boolean;
-  title?: string; // mặc định "Delete Category"
-  message: string; // nội dung hỏi
+  title?: string; 
+  message: string;
   onCancel: () => void;
   onConfirm: () => void;
-  loading?: boolean; // nếu cần chờ xoá
+  loading?: boolean; 
 }
 
 export default function ConfirmModal({

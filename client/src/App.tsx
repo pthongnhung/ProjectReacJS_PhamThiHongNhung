@@ -5,6 +5,8 @@ import LoginPage from "./pages/LoginPage";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import CategoriesPage from "./pages/management/CategoriesPage";
 import VocabsPage from "./pages/management/VocabsPage";
+import FlashcardsPage from "./pages/FlashcardsPage";
+import QuizPage from "./pages/QuizPage";
 
 const router = createBrowserRouter([
   {
@@ -29,7 +31,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/vocabs",
-    element: <VocabsPage />
+    element: <VocabsPage />,
+  },
+  {
+    path: "/flashcards",
+    element: <FlashcardsPage />,
+  },
+  {
+    path: "/quiz", 
+    element:<QuizPage />
   },
 ]);
 

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type {
-  AuthResponse,
+  AuthResponse, 
   RegisterPayload,
   LoginPayload,
   User,
@@ -10,19 +10,18 @@ import authApi from "../../apis/Api";
 
 interface AuthState {
   user: User | null;
-  token: string | null;
   loading: boolean;
   error: string | null;
 }
 
+// Hydrate user từ localStorage (nếu có)
+const saved = localStorage.getItem("currentUser");
 const initialState: AuthState = {
-  user: null,
-  token: localStorage.getItem("token"),
+  user: saved ? (JSON.parse(saved) as User) : null,
   loading: false,
   error: null,
 };
 
-// thunk đăng ký
 export const registerThunk = createAsyncThunk<
   AuthResponse,
   RegisterPayload,
@@ -36,7 +35,6 @@ export const registerThunk = createAsyncThunk<
   }
 });
 
-// thunk đăng nhập
 export const loginThunk = createAsyncThunk<
   AuthResponse,
   LoginPayload,
@@ -57,8 +55,6 @@ const authSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.user = null;
-      state.token = null;
-      localStorage.removeItem("token");
       localStorage.removeItem("currentUser");
     },
   },
@@ -71,12 +67,6 @@ const authSlice = createSlice({
     builder.addCase(registerThunk.fulfilled, (state, action) => {
       state.loading = false;
       state.user = action.payload.user;
-      if (action.payload.token) {
-        state.token = action.payload.token;
-        localStorage.setItem("token", action.payload.token);
-      } else {
-        state.token = null;
-      }
       localStorage.setItem("currentUser", JSON.stringify(action.payload.user));
     });
     builder.addCase(registerThunk.rejected, (state, action) => {
@@ -92,12 +82,6 @@ const authSlice = createSlice({
     builder.addCase(loginThunk.fulfilled, (state, action) => {
       state.loading = false;
       state.user = action.payload.user;
-      if (action.payload.token) {
-        state.token = action.payload.token;
-        localStorage.setItem("token", action.payload.token);
-      } else {
-        state.token = null;
-      }
       localStorage.setItem("currentUser", JSON.stringify(action.payload.user));
     });
     builder.addCase(loginThunk.rejected, (state, action) => {

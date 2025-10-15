@@ -6,55 +6,123 @@
       "email": "pthongnhung13122006@gmail.com",
       "password": "12345678",
       "id": 1
-    },
-    {
-      "firstName": "Phạm Thị",
-      "lastName": "Hồng Nhung",
-      "email": "pthongnhung131222006@gmail.com",
-      "password": "12345678",
-      "id": 2
     }
   ],
   "categories": [
     {
       "name": "Food and Drinks",
-      "description": "Từ vựng liên quan đến đồ ăn",
+      "description": "Từ vựng liên quan đến đồ ăn và thức uống",
       "id": 1
     },
     {
+      "name": "Animals",
+      "description": "Từ vựng về các loài động vật",
+      "id": 2
+    },
+    {
       "name": "Emotions and Feelings",
-      "description": "Từ vựng liên quan tới mô tả cảm xúc",
+      "description": "Từ vựng mô tả cảm xúc, trạng thái tinh thần",
       "id": 3
     },
     {
-      "name": "vwavgw",
-      "description": "fwagvw",
+      "name": "School and Education",
+      "description": "Từ vựng về học tập, trường học và lớp học",
       "id": 4
     },
     {
-      "name": "vsDVwe",
-      "description": "bsebe",
+      "name": "Technology",
+      "description": "Từ vựng liên quan đến công nghệ, máy tính và internet",
       "id": 5
+    },
+    {
+      "name": "Travel and Places",
+      "description": "Từ vựng về du lịch và địa điểm",
+      "id": 6
+    },
+    {
+      "name": "Jobs and Professions",
+      "description": "Từ vựng về nghề nghiệp và công việc",
+      "id": 7
+    },
+    {
+      "name": "Nature and Environment",
+      "description": "Từ vựng liên quan đến thiên nhiên và môi trường",
+      "id": 8
+    },
+    {
+      "name": "Sports and Hobbies",
+      "description": "Từ vựng về thể thao và sở thích cá nhân",
+      "id": 9
+    },
+    {
+      "name": "Health and Body",
+      "description": "Từ vựng về sức khỏe, cơ thể và y học",
+      "id": 10
     }
   ],
   "vocabs": [
     {
-      "word": "a",
-      "meaning": "a",
+      "word": "bread",
+      "meaning": "bánh mì",
       "categoryId": 1,
-      "id": 1
+      "id": 1,
+      "isLearned": true
     },
     {
-      "word": "as",
-      "meaning": "sa",
-      "categoryId": 1,
-      "id": 2
+      "word": "tiger",
+      "meaning": "con hổ",
+      "categoryId": 2,
+      "id": 2,
+      "isLearned": true
     },
     {
-      "word": "as",
-      "meaning": "as",
-      "categoryId": 1,
-      "id": 3
+      "word": "happy",
+      "meaning": "vui vẻ",
+      "categoryId": 3,
+      "id": 3,
+      "isLearned": false
+    },
+    {
+      "word": "teacher",
+      "meaning": "giáo viên",
+      "categoryId": 4,
+      "id": 4,
+      "isLearned": false
+    },
+    {
+      "word": "computer",
+      "meaning": "máy tính",
+      "categoryId": 5,
+      "id": 5,
+      "isLearned": true
+    },
+    {
+      "word": "airport",
+      "meaning": "sân bay",
+      "categoryId": 6,
+      "id": 6,
+      "isLearned": false
+    },
+    {
+      "word": "doctor",
+      "meaning": "bác sĩ",
+      "categoryId": 7,
+      "id": 7,
+      "isLearned": true
+    },
+    {
+      "word": "mountain",
+      "meaning": "ngọn núi",
+      "categoryId": 8,
+      "id": 8,
+      "isLearned": false
+    },
+    {
+      "word": "football",
+      "meaning": "bóng đá",
+      "categoryId": 9,
+      "id": 9,
+      "isLearned": true
     }
   ]
 }
