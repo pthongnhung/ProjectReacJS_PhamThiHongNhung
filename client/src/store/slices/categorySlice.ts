@@ -25,11 +25,10 @@ const initialState: CategoryState = {
   loading: false,
   error: null,
   page: 1,
-  limit: 5, // mặc định 5 item/trang
+  limit: 5,
   total: 0,
 };
 
-// fetchCategories giờ trả về { data, total }
 export const fetchCategories = createAsyncThunk<
   { data: Category[]; total: number },
   CategoryQuery | undefined,
@@ -88,7 +87,7 @@ const categorySlice = createSlice({
     },
     setLimit: (s, a: PayloadAction<number>) => {
       s.limit = a.payload;
-      s.page = 1; // reset về trang 1 nếu đổi limit
+      s.page = 1;
     },
   },
   extraReducers: (b) => {
@@ -110,11 +109,23 @@ const categorySlice = createSlice({
       s.loading = true;
       s.error = null;
     });
-    b.addCase(createCategory.fulfilled, (s) => {
+    b.addCase(createCategory.fulfilled, (s, a) => {
       s.loading = false;
-        
-        s.total = (s.total || 0) + 1; 
+
+      const oldTotal = s.total || 0;
+      const newTotal = oldTotal + 1;
+      s.total = newTotal;
+
+      const lastPage = Math.max(1, Math.ceil(newTotal / Math.max(1, s.limit)));
+      if (s.page === lastPage) {
+        s.items.push(a.payload);
+
+        if (s.items.length > s.limit) {
+          s.items.shift();
+        }
+      }
     });
+
     b.addCase(createCategory.rejected, (s, a) => {
       s.loading = false;
       s.error = a.payload || "Tạo danh mục thất bại";
@@ -127,7 +138,7 @@ const categorySlice = createSlice({
 
     b.addCase(deleteCategory.fulfilled, (s, a) => {
       s.items = s.items.filter((x) => x.id !== a.payload);
-      s.total -= 1; // tổng giảm đi 1
+      s.total -= 1;
     });
   },
 });

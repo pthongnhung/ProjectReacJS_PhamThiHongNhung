@@ -7,13 +7,9 @@ interface VocabState {
   items: Vocab[];
   loading: boolean;
   error: string | null;
-
-  // phân trang
   page: number;
   limit: number;
   total: number;
-
-  // filter
   q: string;
   categoryId: number | "";
 }
@@ -87,7 +83,6 @@ export const deleteVocab = createAsyncThunk<
     return thunkApi.rejectWithValue(e?.message || "Xoá từ vựng thất bại");
   }
 });
-// ⬇️ thunk mới: đánh dấu đã học / bỏ đánh dấu
 export const markLearned = createAsyncThunk<
   Vocab,
   { id: number; isLearned: boolean },
@@ -108,7 +103,7 @@ const vocabSlice = createSlice({
     },
     setLimit: (s, a: { payload: number }) => {
       s.limit = a.payload;
-      s.page = 1; // reset về trang 1 khi đổi limit
+      s.page = 1; 
     },
     setSearch: (s, a: { payload: string }) => {
       s.q = a.payload;
@@ -118,7 +113,6 @@ const vocabSlice = createSlice({
       s.categoryId = a.payload;
       s.page = 1;
     },
-    // có thể thêm resetFilter nếu cần
   },
   extraReducers: (b) => {
     b.addCase(fetchVocabs.pending, (s) => {
@@ -141,7 +135,6 @@ const vocabSlice = createSlice({
     });
     b.addCase(createVocab.fulfilled, (s, a) => {
       s.loading = false;
-      // có thể push lên đầu; nhưng để đồng bộ total/paging, tốt nhất fetch lại sau khi tạo từ trang UI
       s.items.unshift(a.payload);
       s.total += 1;
     });
@@ -161,7 +154,7 @@ const vocabSlice = createSlice({
     });
     b.addCase(markLearned.fulfilled, (s, a) => {
       const i = s.items.findIndex((x) => x.id === a.payload.id);
-      if (i >= 0) s.items[i] = a.payload; // cập nhật isLearned ngay
+      if (i >= 0) s.items[i] = a.payload; 
     });
   },
 });

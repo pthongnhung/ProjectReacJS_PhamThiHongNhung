@@ -6,6 +6,9 @@ export type Paginated<T> = { data: T[]; total: number };
 const vocabApi = {
   async getAll(params: VocabQuery = {}): Promise<Paginated<Vocab>> {
     const res = await axiosClient.get<Vocab[]>("/vocabs", { params });
+    //  const res = await axiosClient.get<Vocab[]>("/vocabs", {
+    //    params: { _sort: "id", _order: "desc", ...params }, 
+    //  });
     const total = Number(res.headers?.["x-total-count"] || 0);
     return { data: res.data, total };
   },

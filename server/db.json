@@ -30,16 +30,6 @@
       "id": 4
     },
     {
-      "name": "Technology",
-      "description": "Từ vựng liên quan đến công nghệ, máy tính và internet",
-      "id": 5
-    },
-    {
-      "name": "Travel and Places",
-      "description": "Từ vựng về du lịch và địa điểm",
-      "id": 6
-    },
-    {
       "name": "Jobs and Professions",
       "description": "Từ vựng về nghề nghiệp và công việc",
       "id": 7
@@ -66,7 +56,7 @@
       "meaning": "bánh mì",
       "categoryId": 1,
       "id": 1,
-      "isLearned": true
+      "isLearned": false
     },
     {
       "word": "tiger",
@@ -87,20 +77,6 @@
       "meaning": "giáo viên",
       "categoryId": 4,
       "id": 4,
-      "isLearned": false
-    },
-    {
-      "word": "computer",
-      "meaning": "máy tính",
-      "categoryId": 5,
-      "id": 5,
-      "isLearned": true
-    },
-    {
-      "word": "airport",
-      "meaning": "sân bay",
-      "categoryId": 6,
-      "id": 6,
       "isLearned": false
     },
     {

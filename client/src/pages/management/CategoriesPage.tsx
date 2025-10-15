@@ -58,15 +58,18 @@ export default function CategoriesPage() {
   };
   const onRemove = (id: number) => setOpenDelete({ open: true, id });
 
-  const submitForm = async (body: CategoryPayload) => {
-    if (editing) {
-      const res = await dispatch(updateCategory({ id: editing.id, body }));
-      if (updateCategory.fulfilled.match(res)) setOpenForm(false);
-    } else {
-      const res = await dispatch(createCategory(body));
-      if (createCategory.fulfilled.match(res)) setOpenForm(false);
-    } 
-  };
+ const submitForm = async (body: CategoryPayload) => {
+   if (editing) {
+     const res = await dispatch(updateCategory({ id: editing.id, body }));
+     if (updateCategory.fulfilled.match(res)) setOpenForm(false);
+   } else {
+     const res = await dispatch(createCategory(body));
+     if (createCategory.fulfilled.match(res)) {
+       setOpenForm(false);
+     }
+   }
+ };
+
 
 
 
